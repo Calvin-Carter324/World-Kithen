@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion - World Kitchen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .login-container h2 {
+      margin-bottom: 1rem;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .google-btn {
+      background: #db4437;
+      color: white;
+    }
+    .facebook-btn {
+      background: #3b5998;
+      color: white;
+    }
+    .login-btn {
+      background: #28a745;
+      color: white;
+    }
+    .register-link {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Connexion</h2>
+
+    <button class="google-btn">Se connecter avec Google</button>
+    <button class="facebook-btn">Se connecter avec Facebook</button>
+
+    <hr>
+
+    <input type="email" placeholder="Adresse email" id="email">
+    <input type="password" placeholder="Mot de passe" id="password">
+    <button class="login-btn">Se connecter</button>
+
+    <div class="register-link">
+      Pas encore de compte ? <a href="#">Créer un compte</a>
+    </div>
+  </div>
+
+</body>
+</html>
