@@ -1,54 +1,201 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE html><html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>World Kitchen - Accueil</title>
+  <title>World Kitchen</title>
   <style>
     body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: white;
+      padding: 1rem;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    .planet {
+      width: 60px;
+      height: 60px;
+      background: url('/images/earth.png') no-repeat center/contain;
+      animation: spinPlanet 5s linear infinite;
+    }
+    @keyframes spinPlanet {
+      0% { transform: rotate(0deg); }
+      97.26% { transform: rotate(131490deg); }
+      97.27% { transform: rotate(131490deg); }
+      100% { transform: rotate(132856deg); }
+    }
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+    }
+    .cart-icon span {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 0.8rem;
+    }
+    .user-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: gray;
+      color: white;
+      display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
-      background: linear-gradient(to bottom right, #f0f0f0, #d6e4f0);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 40px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 30px;
-    }
-
-    button {
-      padding: 15px 30px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 8px;
-      background-color: #007bff;
-      color: white;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      font-weight: bold;
+      font-size: 1rem;
     }
-
-    button:hover {
-      background-color: #0056b3;
+    .connected {
+      background: green;
+    }
+    .menu-section {
+      margin: 2rem;
+    }
+    .country-title {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .country-title img {
+      width: 32px;
+      height: 20px;
+      margin-left: 10px;
+    }
+    .dish {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    .qty-controls button {
+      padding: 5px 10px;
+      margin: 0 5px;
+    }
+    .cart-details {
+      background: #fff;
+      padding: 1rem;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      border-radius: 1rem;
+      display: none;
+    }
+    .cart-details.active {
+      display: block;
+    }
+    .cart-details h3 {
+      margin-top: 0;
+    }
+    .order-btn {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.5rem;
+      background: green;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .form-section {
+      max-width: 400px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-section input {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+    .form-section button {
+      width: 100%;
+      padding: 0.5rem;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
     }
   </style>
 </head>
-<body>
-
-  <h1>Bienvenue sur World Kitchen</h1>
-
-  <div class="buttons">
-    <button onclick="window.location.href='login.html'">Se connecter</button>
-    <button onclick="window.location.href='signup.html'">S'inscrire</button>
+<body><header>
+  <div class="user-icon" id="userIcon">U</div>
+  <div class="planet" id="planet"></div>
+  <div class="cart-icon" id="cartIcon">
+    <img src="/icons/cart.svg" alt="Panier" width="30">
+    <span id="cartCount">0</span>
   </div>
+</header><div class="cart-details" id="cartDetails">
+  <h3>Mon Panier</h3>
+  <div id="cartItems"></div>
+  <div>Total : <strong id="cartTotal">0 €</strong></div>
+  <button class="order-btn" onclick="showLoginForm()">Commander</button>
+</div><div class="menu-section">
+  <div class="country-title">France <img src="/flags/france.png"></div>
+  <div class="dish">
+    <span>Bœuf bourguignon – 14.50 €</span>
+    <div class="qty-controls">
+      <button>-</button><span>0</span><button>+</button>
+    </div>
+  </div>
+</div><div class="form-section" id="loginForm" style="display:none">
+  <h3>Connexion / Inscription</h3>
+  <input type="email" placeholder="Adresse email">
+  <input type="password" placeholder="Mot de passe">
+  <button onclick="showDeliveryForm()">Se connecter / S'inscrire</button>
+</div><div class="form-section" id="deliveryForm" style="display:none">
+  <h3>Adresse & Paiement</h3>
+  <input type="text" placeholder="Nom complet">
+  <input type="text" placeholder="Adresse">
+  <input type="text" placeholder="Code postal">
+  <input type="text" placeholder="Ville">
+  <input type="text" placeholder="Numéro de carte bancaire">
+  <input type="text" placeholder="Date d'expiration">
+  <input type="text" placeholder="CVC">
+  <button>Valider la commande</button>
+</div><script>
+  const cartIcon = document.getElementById('cartIcon');
+  const cartDetails = document.getElementById('cartDetails');
+  const loginForm = document.getElementById('loginForm');
+  const deliveryForm = document.getElementById('deliveryForm');
 
-</body>
-</html>
+  cartIcon.addEventListener('click', () => {
+    cartDetails.classList.toggle('active');
+  });
+
+  function showLoginForm() {
+    loginForm.style.display = 'block';
+    window.scrollTo({ top: loginForm.offsetTop, behavior: 'smooth' });
+  }
+
+  function showDeliveryForm() {
+    loginForm.style.display = 'none';
+    deliveryForm.style.display = 'block';
+    window.scrollTo({ top: deliveryForm.offsetTop, behavior: 'smooth' });
+  }
+</script></body>
+    </html>
